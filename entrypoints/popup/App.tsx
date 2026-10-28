@@ -48,7 +48,16 @@ function App() {
           {totals.map((total, index) => (
             <li key={total.streamer} className="item">
               <span className="rank">{index + 1}</span>
-              <span className="name">{total.streamer}</span>
+              <span className="name">
+                <a
+                  className="name"
+                  href={`https://www.twitch.tv/${total.streamer}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {total.streamer}
+                </a>
+              </span>
               <span className="time">{formatDuration(total.seconds)}</span>
               <div className="bar">
                 <div
