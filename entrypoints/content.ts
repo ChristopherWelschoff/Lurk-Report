@@ -1,3 +1,5 @@
+import type { WatchEntry } from "@/types/WatchEntry";
+
 const IGNORED_PAGES = [
   "directory",
   "settings",
@@ -24,6 +26,15 @@ export default defineContentScript({
       if (!video) {
         return;
       }
+
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+
+      const today = `${year}-${month}-${day}`;
+
+      console.log(`[TW] ${today}`);
 
       const isVisible = document.visibilityState === "visible";
 
