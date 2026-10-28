@@ -29,23 +29,44 @@ function App() {
 
   totals.sort((a, b) => b.seconds - a.seconds);
 
+  const maxSeconds = totals[0]?.seconds ?? 1;
+  const totalSeconds = totals.reduce((sum, total) => sum + total.seconds, 0);
+
   return (
-    <main>
-      <h1>Twitch Wrapped</h1>
-      {entries.length > 0 ? (
-        <ul>
-          {totals.map((total) => (
-            <li key={total.streamer}>
-              <p>Channel: {total.streamer}</p>
-              <p>Watchtime: {formatDuration(total.seconds)}</p>
+    <main className="popup">
+      <header className="header">
+        <h1 className="title">
+          Twitch <span>Wrapped</span>
+        </h1>
+        {totals.length > 0 && (
+          <p className="total">{formatDuration(totalSeconds)} gesamt</p>
+        )}
+      </header>
+
+      {totals.length > 0 ? (
+        <ol className="list">
+          {totals.map((total, index) => (
+            <li key={total.streamer} className="item">
+              <span className="rank">{index + 1}</span>
+              <span className="name">{total.streamer}</span>
+              <span className="time">{formatDuration(total.seconds)}</span>
+              <div className="bar">
+                <div
+                  className="bar-fill"
+                  style={{ width: `${(total.seconds / maxSeconds) * 100}%` }}
+                />
+              </div>
             </li>
           ))}
-        </ul>
+        </ol>
       ) : (
-        <p>You have no watchtime...</p>
+        <p className="empty">
+          Noch keine Watchtime.
+          <br />
+          Schau einen Stream auf Twitch, dann erscheint er hier.
+        </p>
       )}
     </main>
   );
 }
-
 export default App;
