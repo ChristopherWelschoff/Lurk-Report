@@ -4,7 +4,8 @@ A browser extension for Chrome and Opera GX that tracks how long you watch each 
 
 > 🚧 **Version 0.1.0** – currently in review for the Chrome Web Store.
 
-![Lurk Report screenshot](docs/screenshot.png)
+<img width="302" height="389" alt="image" src="https://github.com/user-attachments/assets/bd1f127c-76b8-4ff7-a006-6050d6c0e927" />
+
 
 ## Features
 
