@@ -1,4 +1,5 @@
 import type { WatchEntry } from "@/types/WatchEntry";
+import { getToday } from "@/utils/getToday";
 
 const IGNORED_PAGES = [
   "directory",
@@ -12,17 +13,6 @@ export default defineContentScript({
   matches: ["*://*.twitch.tv/*"],
   main(ctx) {
     console.log("[TW] script läuft");
-
-    function getToday() {
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-
-      const today = `${year}-${month}-${day}`;
-
-      return today;
-    }
 
     ctx.setInterval(() => {
       async function watch() {

@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import type { WatchEntry, StreamerTotal } from "@/types/WatchEntry";
 import "./App.css";
 import { formatDuration } from "@/utils/formatDuration";
+import { getToday } from "@/utils/getToday";
 
 function App() {
   const [entries, setEntries] = useState<WatchEntry[]>([]);
+  const [period, setPeriod] = useState<"today" | "all">("all");
 
   useEffect(() => {
     async function load() {
@@ -20,9 +22,16 @@ function App() {
     return () => unwatch();
   }, []);
 
+  const today = getToday();
+
+  const filteredEntries =
+    period === "today"
+      ? entries.filter((entry) => entry.date === today)
+      : entries;
+
   const totals: StreamerTotal[] = [];
 
-  for (const entry of entries) {
+  for (const entry of filteredEntries) {
     const existing = totals.find((total) => total.streamer === entry.streamer);
 
     if (existing) {
@@ -47,6 +56,20 @@ function App() {
           <p className="total">{formatDuration(totalSeconds)} gesamt</p>
         )}
       </header>
+      <div className="filters">
+        <button
+          className={period === "today" ? "filter active" : "filter"}
+          onClick={() => setPeriod("today")}
+        >
+          Heute
+        </button>
+        <button
+          className={period === "all" ? "filter active" : "filter"}
+          onClick={() => setPeriod("all")}
+        >
+          Gesamt
+        </button>
+      </div>
 
       {totals.length > 0 ? (
         <ol className="list">
