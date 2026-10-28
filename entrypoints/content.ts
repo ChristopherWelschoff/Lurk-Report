@@ -12,7 +12,7 @@ const IGNORED_PAGES = [
 export default defineContentScript({
   matches: ["*://*.twitch.tv/*"],
   main(ctx) {
-    console.log("[TW] script läuft");
+
 
     ctx.setInterval(() => {
       async function watch() {
@@ -58,8 +58,7 @@ export default defineContentScript({
         }
 
         await watchEntries.setValue(entries);
-        console.log("[TW] Entries:", entries);
-        console.log(`[TW] ${today} ${channel} +5s`);
+       
       }
 
       watch();
