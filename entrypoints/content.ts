@@ -1,4 +1,10 @@
-const IGNORED_PAGES = ["directory", "settings", "search", "downloads"];
+const IGNORED_PAGES = [
+  "directory",
+  "settings",
+  "search",
+  "downloads",
+  "videos",
+];
 
 export default defineContentScript({
   matches: ["*://*.twitch.tv/*"],
@@ -13,7 +19,19 @@ export default defineContentScript({
       if (IGNORED_PAGES.includes(channel)) {
         return;
       }
-      console.log("[TW] Channel:", channel);
+
+      const video = document.querySelector("video");
+      if (!video) {
+        return;
+      }
+
+      const isVisible = document.visibilityState === "visible";
+
+      const isWatching = isVisible && !video.paused;
+
+      console.log(
+        `[TW] Channel: ${channel} isWatching: ${isWatching} isVisible: ${isVisible}`,
+      );
     }, 5000);
   },
 });
