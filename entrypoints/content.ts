@@ -1,5 +1,5 @@
 import type { WatchEntry } from "@/types/WatchEntry";
-import { getToday } from "@/utils/getToday";
+import { getToday } from "@/utils/date";
 
 const IGNORED_PAGES = [
   "directory",

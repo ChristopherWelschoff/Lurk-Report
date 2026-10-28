@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import type { WatchEntry, StreamerTotal } from "@/types/WatchEntry";
 import "./App.css";
 import { formatDuration } from "@/utils/formatDuration";
-import { getToday } from "@/utils/getToday";
+import { getToday, getWeekStart } from "@/utils/date";
 
 function App() {
   const [entries, setEntries] = useState<WatchEntry[]>([]);
-  const [period, setPeriod] = useState<"today" | "all">("all");
+  const [period, setPeriod] = useState<"today" | "week" | "month" | "all">(
+    "all",
+  );
 
   useEffect(() => {
     async function load() {
@@ -22,12 +24,18 @@ function App() {
     return () => unwatch();
   }, []);
 
-  const today = getToday();
+  const today = getToday(); // "2026-10-28"
+  const weekStart = getWeekStart(); // "2026-10-26"
+  const currentMonth = today.slice(0, 7); // "2026-10"
 
-  const filteredEntries =
-    period === "today"
-      ? entries.filter((entry) => entry.date === today)
-      : entries;
+  function filterByPeriod(entry: WatchEntry): boolean {
+    if (period === "today") return entry.date === today;
+    if (period === "week") return entry.date >= weekStart;
+    if (period === "month") return entry.date.startsWith(currentMonth);
+    return true;
+  }
+
+  const filteredEntries = entries.filter(filterByPeriod);
 
   const totals: StreamerTotal[] = [];
 
@@ -64,13 +72,24 @@ function App() {
           Heute
         </button>
         <button
+          className={period === "week" ? "filter active" : "filter"}
+          onClick={() => setPeriod("week")}
+        >
+          Woche
+        </button>
+        <button
+          className={period === "month" ? "filter active" : "filter"}
+          onClick={() => setPeriod("month")}
+        >
+          Monat
+        </button>
+        <button
           className={period === "all" ? "filter active" : "filter"}
           onClick={() => setPeriod("all")}
         >
           Gesamt
         </button>
       </div>
-
       {totals.length > 0 ? (
         <ol className="list">
           {totals.map((total, index) => (
