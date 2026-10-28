@@ -58,7 +58,7 @@ function App() {
     <main className="popup">
       <header className="header">
         <h1 className="title">
-          Twitch <span>Wrapped</span>
+          Lurk <span>Report</span>
         </h1>
         {totals.length > 0 && (
           <p className="total">{formatDuration(totalSeconds)} gesamt</p>

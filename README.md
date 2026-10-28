@@ -1,6 +1,8 @@
-# Twitch Wrapped
+# Lurk Report
 
-A browser extension for Chrome and Opera GX that tracks how long you watch each Twitch streamer and turns it into personal stats – like Spotify Wrapped, but for Twitch.
+A browser extension for Chrome and Opera GX that tracks how long you watch each Twitch streamer and turns it into personal stats.
+
+> Not affiliated with Twitch.
 
 > 🚧 **Work in progress** – currently in early development.
 
@@ -23,7 +25,6 @@ All data stays in your browser (`chrome.storage.local`). Nothing is sent to any 
 - TypeScript
 - React
 - Chrome Extension Manifest V3
-
 
 ## Why I built this
 
