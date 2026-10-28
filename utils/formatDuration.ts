@@ -6,5 +6,5 @@ export function formatDuration(seconds: number): string {
     return `${minutes} min`;
   }
 
-  return `${hours}h and ${minutes} min`;
+  return `${hours}h ${minutes} min`;
 }
