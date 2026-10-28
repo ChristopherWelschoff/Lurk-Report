@@ -3,3 +3,8 @@ export type WatchEntry = {
   seconds: number;
   date: string; //yyyy-mm-dd
 };
+
+export type StreamerTotal = {
+  streamer: string;
+  seconds: number;
+};

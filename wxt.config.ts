@@ -6,5 +6,6 @@ export default defineConfig({
   manifest: {
     name: "Twitch Wrapped",
     description: "Tracks your Twitch watch time per streamer.",
+    permissions: ["storage"],
   },
 });

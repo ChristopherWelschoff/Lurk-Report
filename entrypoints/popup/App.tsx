@@ -1,34 +1,50 @@
-import { useState } from "react";
-import reactLogo from "@/assets/react.svg";
-import wxtLogo from "/wxt.svg";
+import { useState, useEffect } from "react";
+import type { WatchEntry, StreamerTotal } from "@/types/WatchEntry";
 import "./App.css";
+import { formatDuration } from "@/utils/formatDuration";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [entries, setEntries] = useState<WatchEntry[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      const data = await watchEntries.getValue();
+
+      setEntries(data);
+    }
+    load();
+  }, []);
+
+  const totals: StreamerTotal[] = [];
+
+  for (const entry of entries) {
+    const existing = totals.find((total) => total.streamer === entry.streamer);
+
+    if (existing) {
+      existing.seconds += entry.seconds;
+    } else {
+      totals.push({ streamer: entry.streamer, seconds: entry.seconds });
+    }
+  }
+
+  totals.sort((a, b) => b.seconds - a.seconds);
 
   return (
-    <>
-      <div>
-        <a href="https://wxt.dev" target="_blank">
-          <img src={wxtLogo} className="logo" alt="WXT logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
+    <main>
       <h1>Twitch Wrapped</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the WXT and React logos to learn more
-      </p>
-    </>
+      {entries.length > 0 ? (
+        <ul>
+          {totals.map((total) => (
+            <li key={total.streamer}>
+              <p>Channel: {total.streamer}</p>
+              <p>Watchtime: {formatDuration(total.seconds)}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>You have no watchtime...</p>
+      )}
+    </main>
   );
 }
 
