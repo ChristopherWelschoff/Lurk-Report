@@ -9,10 +9,15 @@ function App() {
   useEffect(() => {
     async function load() {
       const data = await watchEntries.getValue();
-
       setEntries(data);
     }
     load();
+
+    const unwatch = watchEntries.watch((newEntries) => {
+      setEntries(newEntries);
+    });
+
+    return () => unwatch();
   }, []);
 
   const totals: StreamerTotal[] = [];
@@ -48,16 +53,14 @@ function App() {
           {totals.map((total, index) => (
             <li key={total.streamer} className="item">
               <span className="rank">{index + 1}</span>
-              <span className="name">
-                <a
-                  className="name"
-                  href={`https://www.twitch.tv/${total.streamer}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {total.streamer}
-                </a>
-              </span>
+              <a
+                className="name"
+                href={`https://www.twitch.tv/${total.streamer}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {total.streamer}
+              </a>
               <span className="time">{formatDuration(total.seconds)}</span>
               <div className="bar">
                 <div
@@ -78,4 +81,5 @@ function App() {
     </main>
   );
 }
+
 export default App;
