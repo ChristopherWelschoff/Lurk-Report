@@ -24,15 +24,7 @@ All data stays in your browser (`chrome.storage.local`). Nothing is sent to any 
 - React
 - Chrome Extension Manifest V3
 
-## Getting Started
-
-```bash
-npm install
-npm run dev
-```
-
-This opens a separate Chrome window with the extension loaded.
 
 ## Why I built this
 
-I watch a lot of Twitch and was curious how much time I actually spend with which streamers. The project also helps me learn TypeScript and how browser extensions work.
+I watch a lot of Twitch and was curious how much time I actually spend with which streamers. The project also helps me to improve my TypeScript skill and learn how browser extensions work.
