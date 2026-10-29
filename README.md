@@ -9,14 +9,14 @@ A browser extension for Chrome and Opera GX that tracks how long you watch each 
 
 ## Features
 
-- [x] Detects the current Twitch channel, including channel switches without page reload
-- [x] Counts watch time only while the stream is playing and the tab is visible
-- [x] Stores watch time locally per day and streamer
-- [x] Popup with your personal streamer ranking
-- [x] Filter by today, this week, this month or all time
-- [x] Live updates while the popup is open
-- [ ] Yearly recap of your top streamers
-- [ ] Export and import your data
+- ✅ Detects the current Twitch channel, including channel switches without page reload
+- ✅ Counts watch time only while the stream is playing and the tab is visible
+- ✅ Stores watch time locally per day and streamer
+- ✅ Popup with your personal streamer ranking
+- ✅ Filter by today, this week, this month or all time
+- ✅ Live updates while the popup is open
+- ☑️ Yearly recap of your top streamers
+- ☑️ Export and import your data
 
 ## Privacy
 
