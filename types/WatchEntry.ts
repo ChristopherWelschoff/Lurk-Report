@@ -8,3 +8,5 @@ export type StreamerTotal = {
   streamer: string;
   seconds: number;
 };
+
+export type Period = "today" | "week" | "month" | "all";
