@@ -2,7 +2,8 @@
 
 A browser extension for Chrome and Opera GX that tracks how long you watch each Twitch streamer and turns it into personal stats.
 
-> 🚧 **Version 0.1.0** – currently in review for the Chrome Web Store.
+> 🚧 **Version 0.1.0**
+ [Download via Chrome Web Store](https://chromewebstore.google.com/detail/ofiknpfigfoilpodbngmfmflachlgjki?utm_source=item-share-cb)
 
 <img width="1269" height="785" alt="image" src="https://github.com/user-attachments/assets/b067316c-479b-4c2c-b9e6-5012ccb77cc6" />
 
